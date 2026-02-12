@@ -124,12 +124,12 @@ Some features may still be incomplete, under testing, or subject to change. Impr
 ## 📸 Screenshots
 
 ### 1️⃣ Image 1
-![Image 1](imgs/0.png)
+![Image 1](imgs/0.jpeg)
 
 ---
 
-### 1️⃣ Image 1
-![Image 1](imgs/1.png)
+### 1️⃣ Image inicio
+![Image 1](imgs/inicio.png)
 
 ---
 
