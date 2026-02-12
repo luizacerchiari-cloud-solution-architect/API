@@ -98,3 +98,15 @@ jar-management-api/
 ![Image 3](imgs/3.png)
 
 
+---
+
+
+## ⚠️ Project Notice
+
+This project is currently **not finished**.
+
+Some features are still under development, improvements are being implemented, and validations/tests may not be fully complete.
+
+Please note that this version should **not be considered production-ready**.
+
+
