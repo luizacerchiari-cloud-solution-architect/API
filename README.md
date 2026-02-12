@@ -74,6 +74,9 @@ jar-management-api/
 
 ## 📸 Screenshots
 
+https://editor.swagger.io/ 
+https://github.com/luizacerchiari-cloud-solution-architect/API/blob/main/imgs/swagger.yml
+
 ### 1️⃣ Image 1
 ![Image 1](imgs/0.jpeg)
 
