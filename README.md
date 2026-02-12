@@ -85,7 +85,7 @@ jar-management-api/
 ---
 
 ### 1️⃣ Image inicio
-![Image 1](imgs/inicio.png)
+![Image 1](imgs/inicio.jpeg)
 
 ---
 
