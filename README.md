@@ -74,9 +74,9 @@ jar-management-api/
 
 ## 📸 Screenshots
 
-| Layer        | Description                          |
+| Site Swagger .yml        | Code .yml (Código)                  |
 |--------------|--------------------------------------|
-| [Site swagger -> editor.swagger.io ](https://editor.swagger.io/) |[Code YML (Código) -> github.com/luizacerchiari-cloud-solution-architect/API/blob/main/imgs/swagger.yml](https://github.com/luizacerchiari-cloud-solution-architect/API/blob/main/imgs/swagger.yml)        |
+| [editor.swagger.io ](https://editor.swagger.io/) |[spec swagger](https://github.com/luizacerchiari-cloud-solution-architect/API/blob/main/imgs/swagger.yml)        |
 |
 
 ### 1️⃣ Image 1
