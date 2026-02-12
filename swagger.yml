@@ -1,0 +1,363 @@
+openapi: 3.0.3
+info:
+  title: Jar Management API
+  description: REST API for managing jars, sales, customers and sellers
+  version: 1.0.0
+
+servers:
+  - url: http://localhost:5473/api
+
+tags:
+  - name: Jars
+  - name: Customers
+  - name: Sellers
+  - name: Sales
+  - name: Reports
+  - name: Ranking
+
+paths:
+
+  /jars:
+    post:
+      tags: [Jars]
+      summary: Create a new jar
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/JarRequest'
+      responses:
+        '201':
+          description: Jar created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JarResponse'
+        '400':
+          description: Invalid request
+
+    get:
+      tags: [Jars]
+      summary: List all jars
+      responses:
+        '200':
+          description: List of jars
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/JarResponse'
+
+  /jars/{id}:
+    get:
+      tags: [Jars]
+      summary: Get jar by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Jar found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JarResponse'
+        '404':
+          description: Jar not found
+
+  /customers:
+    post:
+      tags: [Customers]
+      summary: Create customer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CustomerRequest'
+      responses:
+        '201':
+          description: Customer created
+        '400':
+          description: Invalid request
+
+    get:
+      tags: [Customers]
+      summary: List customers
+      responses:
+        '200':
+          description: List of customers
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CustomerResponse'
+
+  /sellers:
+    post:
+      tags: [Sellers]
+      summary: Create seller
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SellerRequest'
+      responses:
+        '201':
+          description: Seller created
+        '400':
+          description: Invalid request
+
+    get:
+      tags: [Sellers]
+      summary: List sellers
+      responses:
+        '200':
+          description: List of sellers
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SellerResponse'
+
+  /sales:
+    post:
+      tags: [Sales]
+      summary: Register jar sale
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SaleRequest'
+      responses:
+        '201':
+          description: Sale successfully registered
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SaleResponse'
+        '400':
+          description: Validation error
+
+    get:
+      tags: [Sales]
+      summary: List all sales
+      responses:
+        '200':
+          description: List of sales
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SaleResponse'
+
+  /sales/sold-jars:
+    get:
+      tags: [Sales]
+      summary: List all sold jars
+      responses:
+        '200':
+          description: List of sold jars
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SoldJarResponse'
+
+  /reports/excel:
+    get:
+      tags: [Reports]
+      summary: Generate Excel report
+      responses:
+        '200':
+          description: Excel file generated
+          content:
+            application/vnd.openxmlformats-officedocument.spreadsheetml.sheet:
+              schema:
+                type: string
+                format: binary
+
+  /ranking/sellers:
+    get:
+      tags: [Ranking]
+      summary: Sellers ranking
+      parameters:
+        - name: startDate
+          in: query
+          schema:
+            type: string
+            format: date
+        - name: endDate
+          in: query
+          schema:
+            type: string
+            format: date
+        - name: saleStatus
+          in: query
+          schema:
+            type: string
+            enum: [SOLD, AVAILABLE]
+      responses:
+        '200':
+          description: Ranking returned successfully
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SellerRankingResponse'
+
+components:
+  schemas:
+
+    JarRequest:
+      type: object
+      required: [name]
+      properties:
+        name:
+          type: string
+        motherId:
+          type: integer
+          format: int64
+
+    JarResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        motherId:
+          type: integer
+          format: int64
+        childrenQuantity:
+          type: integer
+        price:
+          type: number
+          format: double
+        status:
+          type: string
+          enum: [AVAILABLE, SOLD]
+
+    CustomerRequest:
+      type: object
+      required: [name, discountEligible]
+      properties:
+        name:
+          type: string
+        discountEligible:
+          type: boolean
+
+    CustomerResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        discountEligible:
+          type: boolean
+
+    SellerRequest:
+      type: object
+      required: [name, cpf, registration]
+      properties:
+        name:
+          type: string
+        cpf:
+          type: string
+        registration:
+          type: string
+
+    SellerResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        cpf:
+          type: string
+        registration:
+          type: string
+
+    SaleRequest:
+      type: object
+      required: [customerId, sellerId, jarIds]
+      properties:
+        customerId:
+          type: integer
+          format: int64
+        sellerId:
+          type: integer
+          format: int64
+        jarIds:
+          type: array
+          items:
+            type: integer
+            format: int64
+
+    SaleResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        saleDate:
+          type: string
+          format: date-time
+        totalAmount:
+          type: number
+          format: double
+        discountApplied:
+          type: boolean
+        customer:
+          type: string
+        seller:
+          type: string
+
+    SoldJarResponse:
+      type: object
+      properties:
+        jarId:
+          type: integer
+          format: int64
+        jarName:
+          type: string
+        saleDate:
+          type: string
+          format: date-time
+        saleAmount:
+          type: number
+          format: double
+        customer:
+          type: string
+
+    SellerRankingResponse:
+      type: object
+      properties:
+        sellerId:
+          type: integer
+          format: int64
+        name:
+          type: string
+        totalSales:
+          type: integer
+        totalAmountSold:
+          type: number
+          format: double
