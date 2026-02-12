@@ -1,0 +1,363 @@
+openapi: 3.0.3
+info:
+  title: API Gestão de Potes
+  description: API REST para gerenciamento de potes, vendas, clientes e vendedores
+  version: 1.0.0
+
+servers:
+  - url: http://localhost:49217/api
+
+tags:
+  - name: Potes
+  - name: Clientes
+  - name: Vendedores
+  - name: Vendas
+  - name: Relatórios
+  - name: Ranking
+
+paths:
+
+  /potes:
+    post:
+      tags: [Potes]
+      summary: Cadastrar um novo pote
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PoteRequest'
+      responses:
+        '201':
+          description: Pote cadastrado com sucesso
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PoteResponse'
+        '400':
+          description: Requisição inválida
+
+    get:
+      tags: [Potes]
+      summary: Listar todos os potes
+      responses:
+        '200':
+          description: Lista de potes
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PoteResponse'
+
+  /potes/{id}:
+    get:
+      tags: [Potes]
+      summary: Buscar pote por ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Pote encontrado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PoteResponse'
+        '404':
+          description: Pote não encontrado
+
+  /clientes:
+    post:
+      tags: [Clientes]
+      summary: Cadastrar cliente
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ClienteRequest'
+      responses:
+        '201':
+          description: Cliente cadastrado
+        '400':
+          description: Requisição inválida
+
+    get:
+      tags: [Clientes]
+      summary: Listar clientes
+      responses:
+        '200':
+          description: Lista de clientes
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ClienteResponse'
+
+  /vendedores:
+    post:
+      tags: [Vendedores]
+      summary: Cadastrar vendedor
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VendedorRequest'
+      responses:
+        '201':
+          description: Vendedor cadastrado
+        '400':
+          description: Requisição inválida
+
+    get:
+      tags: [Vendedores]
+      summary: Listar vendedores
+      responses:
+        '200':
+          description: Lista de vendedores
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/VendedorResponse'
+
+  /vendas:
+    post:
+      tags: [Vendas]
+      summary: Registrar venda de potes
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VendaRequest'
+      responses:
+        '201':
+          description: Venda registrada com sucesso
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VendaResponse'
+        '400':
+          description: Erro na validação da venda
+
+    get:
+      tags: [Vendas]
+      summary: Listar vendas realizadas
+      responses:
+        '200':
+          description: Lista de vendas
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/VendaResponse'
+
+  /vendas/potes-vendidos:
+    get:
+      tags: [Vendas]
+      summary: Listar todos os potes vendidos
+      responses:
+        '200':
+          description: Lista de potes vendidos
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PoteVendidoResponse'
+
+  /relatorios/excel:
+    get:
+      tags: [Relatórios]
+      summary: Gerar relatório em Excel
+      responses:
+        '200':
+          description: Arquivo Excel gerado
+          content:
+            application/vnd.openxmlformats-officedocument.spreadsheetml.sheet:
+              schema:
+                type: string
+                format: binary
+
+  /ranking/vendedores:
+    get:
+      tags: [Ranking]
+      summary: Ranking de vendedores
+      parameters:
+        - name: dataInicio
+          in: query
+          schema:
+            type: string
+            format: date
+        - name: dataFim
+          in: query
+          schema:
+            type: string
+            format: date
+        - name: statusVenda
+          in: query
+          schema:
+            type: string
+            enum: [VENDIDO, DISPONIVEL]
+      responses:
+        '200':
+          description: Ranking retornado com sucesso
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/RankingVendedorResponse'
+
+components:
+  schemas:
+
+    PoteRequest:
+      type: object
+      required: [nome]
+      properties:
+        nome:
+          type: string
+        maeId:
+          type: integer
+          format: int64
+
+    PoteResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        nome:
+          type: string
+        maeId:
+          type: integer
+          format: int64
+        quantidadeFilhos:
+          type: integer
+        preco:
+          type: number
+          format: double
+        status:
+          type: string
+          enum: [DISPONIVEL, VENDIDO]
+
+    ClienteRequest:
+      type: object
+      required: [nome, elegivelDesconto]
+      properties:
+        nome:
+          type: string
+        elegivelDesconto:
+          type: boolean
+
+    ClienteResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        nome:
+          type: string
+        elegivelDesconto:
+          type: boolean
+
+    VendedorRequest:
+      type: object
+      required: [nome, cpf, matricula]
+      properties:
+        nome:
+          type: string
+        cpf:
+          type: string
+        matricula:
+          type: string
+
+    VendedorResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        nome:
+          type: string
+        cpf:
+          type: string
+        matricula:
+          type: string
+
+    VendaRequest:
+      type: object
+      required: [clienteId, vendedorId, potesIds]
+      properties:
+        clienteId:
+          type: integer
+          format: int64
+        vendedorId:
+          type: integer
+          format: int64
+        potesIds:
+          type: array
+          items:
+            type: integer
+            format: int64
+
+    VendaResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        dataVenda:
+          type: string
+          format: date-time
+        valorTotal:
+          type: number
+          format: double
+        descontoAplicado:
+          type: boolean
+        cliente:
+          type: string
+        vendedor:
+          type: string
+
+    PoteVendidoResponse:
+      type: object
+      properties:
+        poteId:
+          type: integer
+          format: int64
+        nomePote:
+          type: string
+        dataVenda:
+          type: string
+          format: date-time
+        valorVenda:
+          type: number
+          format: double
+        cliente:
+          type: string
+
+    RankingVendedorResponse:
+      type: object
+      properties:
+        vendedorId:
+          type: integer
+          format: int64
+        nome:
+          type: string
+        totalVendas:
+          type: integer
+        valorTotalVendido:
+          type: number
+          format: double
