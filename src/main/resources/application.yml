@@ -12,10 +12,10 @@ app:
 
 spring:
   application:
-    name: raquetes-api
+    name: camisas-api
 
   datasource:
-    url: jdbc:postgresql://localhost:5432/raquetes
+    url: jdbc:postgresql://localhost:5432/camisas
     username: postgres
     password: postgres
 

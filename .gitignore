@@ -1,0 +1,51 @@
+# ===== Java =====
+*.class
+*.log
+
+# ===== Maven =====
+/target/
+!.mvn/wrapper/maven-wrapper.jar
+
+# ===== Gradle (caso use futuramente) =====
+/build/
+
+# ===== IDEs =====
+
+## IntelliJ
+.idea/
+*.iml
+*.iws
+*.ipr
+out/
+
+## VS Code
+.vscode/
+
+## Eclipse
+.project
+.classpath
+.settings/
+
+# ===== OS =====
+.DS_Store
+Thumbs.db
+
+# ===== Docker =====
+*.env
+
+# ===== Logs =====
+logs/
+*.log
+
+# ===== Lombok =====
+lombok.config
+
+# ===== Node (se existir frontend depois) =====
+node_modules/
+
+# ===== Arquivos sensíveis =====
+application-local.yml
+application-local.properties
+
+# ===== Postgres volumes =====
+postgres-data/

@@ -4,7 +4,7 @@ services:
   db:
     image: postgres:15
     environment:
-      POSTGRES_DB: raquetes
+      POSTGRES_DB: camisas
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
     ports:
@@ -13,7 +13,7 @@ services:
   api:
     build: .
     environment:
-      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/raquetes
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/camisas
       SPRING_DATASOURCE_USERNAME: postgres
       SPRING_DATASOURCE_PASSWORD: postgres
     ports:
