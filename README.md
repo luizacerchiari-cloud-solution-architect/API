@@ -17,7 +17,7 @@ Autenticação via **JWT (Bearer Token)**.
 
 - A venda registra **data/hora automaticamente**
 - Cliente elegível recebe **20% de desconto**
-- Uma raquete só pode ser vendida **uma única vez**
+- Uma Camisa só pode ser vendida **uma única vez**
 - Não é permitido excluir cadastro do vendedor no ranking que já realizou vendas
 - CPF de vendedor não pode ser duplicado
 
@@ -57,7 +57,7 @@ Autenticação via **JWT (Bearer Token)**.
 │   │   │
 │   │   │   ├── resource/
 │   │   │   │   ├── AuthResource.java
-│   │   │   │   ├── RaqueteResource.java
+│   │   │   │   ├── CamisaResource.java
 │   │   │   │   ├── ClienteResource.java
 │   │   │   │   ├── VendedorResource.java
 │   │   │   │   ├── VendaResource.java
@@ -74,13 +74,13 @@ Autenticação via **JWT (Bearer Token)**.
 │   │   │   │   └── RelatorioService.java
 │   │   │
 │   │   │   ├── repository/
-│   │   │   │   ├── RaqueteRepository.java
+│   │   │   │   ├── CamisaRepository.java
 │   │   │   │   ├── ClienteRepository.java
 │   │   │   │   ├── VendedorRepository.java
 │   │   │   │   └── VendaRepository.java
 │   │   │
 │   │   │   ├── entity/
-│   │   │   │   ├── Raquete.java
+│   │   │   │   ├── Camisa.java
 │   │   │   │   ├── Cliente.java
 │   │   │   │   ├── Vendedor.java
 │   │   │   │   └── Venda.java
@@ -88,13 +88,13 @@ Autenticação via **JWT (Bearer Token)**.
 │   │   │   ├── dto/
 │   │   │   │   ├── request/
 │   │   │   │   │   ├── LoginRequestDTO.java
-│   │   │   │   │   ├── RaqueteRequestDTO.java
+│   │   │   │   │   ├── CamisaRequestDTO.java
 │   │   │   │   │   ├── ClienteRequestDTO.java
 │   │   │   │   │   ├── VendedorRequestDTO.java
 │   │   │   │   │   └── VendaRequestDTO.java
 │   │   │   │   └── response/
 │   │   │   │       ├── LoginResponseDTO.java
-│   │   │   │       ├── RaqueteResponseDTO.java
+│   │   │   │       ├── CamisaResponseDTO.java
 │   │   │   │       ├── ClienteResponseDTO.java
 │   │   │   │       ├── VendedorResponseDTO.java
 │   │   │   │       ├── VendaResponseDTO.java
@@ -264,9 +264,6 @@ GET /api/relatorios/vendas.xlsx
   - https://site.mockito.org/
 
 
-## Run
-
-![alt](imgs/1.png)
 
 ## ⚠️ Project Notice
 
