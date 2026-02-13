@@ -1,8 +1,8 @@
-#  API - Gerenciamento de Raquetes
+#  API - Gerenciamento de Camisas
 
 API REST desenvolvida em **Java + Spring Boot** para gerenciamento de:
 
-- Raquetes  
+- Camisas  
 - Clientes  
 - Vendedores  
 - Vendas  
@@ -47,8 +47,8 @@ Autenticação via **JWT (Bearer Token)**.
 ```
 ├── src/
 │   ├── main/
-│   │   ├── java/com/example/raquetes/
-│   │   │   ├── RaquetesApplication.java
+│   │   ├── java/com/example/camisas/
+│   │   │   ├── CamisasApplication.java
 │   │   │
 │   │   │   ├── config/
 │   │   │   │   ├── OpenApiConfig.java
@@ -66,7 +66,7 @@ Autenticação via **JWT (Bearer Token)**.
 │   │   │
 │   │   │   ├── service/
 │   │   │   │   ├── AuthService.java
-│   │   │   │   ├── RaqueteService.java
+│   │   │   │   ├── Camisaservice.java
 │   │   │   │   ├── ClienteService.java
 │   │   │   │   ├── VendedorService.java
 │   │   │   │   ├── VendaService.java
@@ -123,7 +123,7 @@ Autenticação via **JWT (Bearer Token)**.
 │   │           └── V3__insert_initial_data.sql
 │   │
 │   └── test/
-│       └── java/com/example/raquetes/
+│       └── java/com/example/camisas/
 │           ├── resource/
 │           ├── service/
 │           └── repository/
@@ -177,10 +177,10 @@ POST /api/auth/login
 
 # 📚 Endpoints
 
-## Raquetes
+## Camisas
 
-POST /api/raquetes\
-GET /api/raquetes
+POST /api/camisas\
+GET /api/camisas
 
 ## Clientes
 
@@ -208,6 +208,12 @@ GET
 GET /api/relatorios/vendas.xlsx
 
 ------------------------------------------------------------------------
+# Run
+
+![Exemplo](imgs/1.png)
+
+
+![Exemplo](imgs/2.png)
 
 # Links
 
@@ -256,6 +262,11 @@ GET /api/relatorios/vendas.xlsx
 
 - **Mockito**
   - https://site.mockito.org/
+
+
+## Run
+
+![alt](imgs/1.png)
 
 ## ⚠️ Project Notice
 
