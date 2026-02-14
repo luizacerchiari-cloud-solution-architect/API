@@ -209,6 +209,7 @@ GET /api/relatorios/vendas.xlsx
 
 ------------------------------------------------------------------------
 # Run
+![Exemplo](imgs/1.jpg)
 
 ![Exemplo](imgs/2.png)
 
